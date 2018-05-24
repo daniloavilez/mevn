@@ -57,3 +57,14 @@ exports.updatePost = function (req, res) {
         });
     });
 };
+exports.deletePost = function (req, res) {
+    post_1.default.deleteOne({ title: req.params.title, description: req.params.description }, function (error) {
+        if (error) {
+            console.error(error);
+        }
+        res.send({
+            success: true,
+            message: "Post deleted successfully!",
+        });
+    });
+};

@@ -16,7 +16,7 @@
           <td>{{ post.description }}</td>
           <td align="center">
             <router-link v-bind:to="{ name: 'EditPost', params: { id: post._id } }">Edit</router-link> |
-            <a href="#">Delete</a>
+            <a v-on:click="deletePost(index, post)">Delete</a>
           </td>
         </tr>
       </table>
@@ -30,6 +30,7 @@
 
 <script>
 import PostService from "@/services/postservice";
+import { setTimeout } from 'timers';
 export default {
     name: "posts",
     data () {
@@ -44,6 +45,27 @@ export default {
         async getPosts  () {
             const response = await PostService.fetchPosts()
             this.posts = response.data
+        },
+        async deletePost (index, post) {
+            this.$dialog.confirm("Do you want to delete the post selected?", { loader: true })
+              .then((dialog) => {
+                setTimeout(() => {
+                  const response = PostService.deletePost(post)
+                  dialog.close();
+
+                  // get index of the post that will be deleted
+                  const currIndex = this.posts.posts.indexOf(post);
+
+                  // remove the post deleted
+                  this.posts.posts.splice(currIndex, 1);
+
+                  // refresh component
+                  app.$forceUpdate;
+                }, 2500);
+              })
+              .catch(() => {
+
+              });
         }
     }
 }
@@ -74,6 +96,7 @@ table tr:nth-child(1) {
 a {
   color: #4d7ef7;
   text-decoration: none;
+  cursor: pointer;
 }
 a.add_post_link {
   background: #4d7ef7;

@@ -95,6 +95,7 @@ app.get("/posts", postController.getPosts);
 app.post("/posts", postController.postPosts);
 app.get("/posts/:id", postController.postById);
 app.put("/posts", postController.updatePost);
+app.delete("/posts/:title/:description", postController.deletePost);
 // app.get("/login", userController.getLogin);
 // app.post("/login", userController.postLogin);
 // app.get("/logout", userController.logout);

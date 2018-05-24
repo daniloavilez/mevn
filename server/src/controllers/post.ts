@@ -53,3 +53,14 @@ export let updatePost = (req: Request, res: Response) => {
         });
     });
 };
+
+export let deletePost = (req: Request, res: Response) => {
+    post.deleteOne({title: req.params.title, description: req.params.description}, (error) => {
+        if (error) { console.error(error); }
+
+        res.send({
+            success: true,
+            message: "Post deleted successfully!",
+        });
+    });
+};
