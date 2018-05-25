@@ -1,12 +1,16 @@
-import mongoose from "mongoose";
+import { injectable } from "inversify";
 
-const schema = mongoose.Schema;
+interface IPost {
+  description: string;
+  title: string;
+  _id?: string;
+}
 
-const postSchema = new schema({
-    description: String,
-    title: String,
-});
-
-const post = mongoose.model("Post", postSchema);
-
-export default post;
+@injectable()
+export class Post implements IPost {
+  constructor(
+    public description: string,
+    public title: string,
+    public _id?: string,
+  ) { }
+}

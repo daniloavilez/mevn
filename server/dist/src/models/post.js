@@ -1,13 +1,25 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-}
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var mongoose_1 = __importDefault(require("mongoose"));
-var schema = mongoose_1.default.Schema;
-var postSchema = new schema({
-    description: String,
-    title: String,
-});
-var post = mongoose_1.default.model("Post", postSchema);
-exports.default = post;
+var inversify_1 = require("inversify");
+var Post = /** @class */ (function () {
+    function Post(description, title, _id) {
+        this.description = description;
+        this.title = title;
+        this._id = _id;
+    }
+    Post = __decorate([
+        inversify_1.injectable(),
+        __metadata("design:paramtypes", [String, String, String])
+    ], Post);
+    return Post;
+}());
+exports.Post = Post;

@@ -1,7 +1,9 @@
-import { Request, Response } from "express";
+import { controller, httpGet } from "inversify-express-utils";
 
-export let index = (req: Request, res: Response) => {
-    res.render("home", {
-        title: "Home",
-    });
-};
+@controller("/")
+export class HomeController {
+  @httpGet("/")
+  public get(): any {
+    return { title: "Home" };
+  }
+}
