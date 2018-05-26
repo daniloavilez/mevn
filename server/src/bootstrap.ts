@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { InversifyExpressServer } from "inversify-express-utils";
 import { Container } from "inversify";
-// import { makeLoggerMiddleware } from "inversify-logger-middleware";
+import { makeLoggerMiddleware } from "inversify-logger-middleware";
 import * as bodyParser from "body-parser";
 // import * as helmet from "helmet";
 import TYPES from "./constant/types";
@@ -13,9 +13,11 @@ import "./controllers/post";
 // load everything needed to the Container
 let container = new Container();
 
+console.log(process.env.NODE_ENV);
+
 if (process.env.NODE_ENV === "development") {
-    // let logger = makeLoggerMiddleware();
-    // container.applyMiddleware(logger);
+    let logger = makeLoggerMiddleware();
+    container.applyMiddleware(logger);
 }
 
 container.bind<MongoDBClient>(TYPES.MongoDBClient).to(MongoDBClient);
@@ -28,6 +30,12 @@ server.setConfig((app) => {
     extended: true
   }));
   app.use(bodyParser.json());
+  app.configure("development", () => {
+
+  });
+  app.configure("production", () => {
+    
+  });
 //   app.use(helmet());
 });
 

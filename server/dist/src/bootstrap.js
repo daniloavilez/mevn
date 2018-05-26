@@ -13,7 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 var inversify_express_utils_1 = require("inversify-express-utils");
 var inversify_1 = require("inversify");
-// import { makeLoggerMiddleware } from "inversify-logger-middleware";
+var inversify_logger_middleware_1 = require("inversify-logger-middleware");
 var bodyParser = __importStar(require("body-parser"));
 // import * as helmet from "helmet";
 var types_1 = __importDefault(require("./constant/types"));
@@ -23,9 +23,10 @@ require("./controllers/home");
 require("./controllers/post");
 // load everything needed to the Container
 var container = new inversify_1.Container();
+console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === "development") {
-    // let logger = makeLoggerMiddleware();
-    // container.applyMiddleware(logger);
+    var logger = inversify_logger_middleware_1.makeLoggerMiddleware();
+    container.applyMiddleware(logger);
 }
 container.bind(types_1.default.MongoDBClient).to(client_1.MongoDBClient);
 container.bind(types_1.default.PostService).to(post_1.PostService);
