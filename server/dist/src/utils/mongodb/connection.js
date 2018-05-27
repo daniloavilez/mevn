@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var mongodb_1 = require("mongodb");
-var connStr = "mongodb://localhost:27017";
+var connStr = "mongodb://mongos:27017";
 var dbName = "posts";
 var MongoDBConnection = /** @class */ (function () {
     function MongoDBConnection() {

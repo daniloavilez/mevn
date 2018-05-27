@@ -30,12 +30,6 @@ server.setConfig((app) => {
     extended: true
   }));
   app.use(bodyParser.json());
-  app.configure("development", () => {
-
-  });
-  app.configure("production", () => {
-    
-  });
 //   app.use(helmet());
 });
 

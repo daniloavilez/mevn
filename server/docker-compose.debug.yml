@@ -2,12 +2,26 @@ version: '2.1'
 
 services:
   sampletypescript:
-    image: sampletypescript
+    image: apiserver
+    container_name: apiserver
     build: .
     environment:
       NODE_ENV: development
+    depends_on: 
+      - "mongodb"
     ports:
       - 3000:3000
       - 9229:9229
-    ## set your startup file here
-    command: node --inspect index.js
+    networks: 
+      - backend
+    command: ["npm", "i" ]
+    command: ["npm", "run", "start-prod" ]
+  mongodb:
+    container_name: mongos
+    image: mongo
+    ports:
+      - 27017:27017
+    networks: 
+      - backend
+networks: 
+  backend:

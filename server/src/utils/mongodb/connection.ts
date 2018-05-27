@@ -1,6 +1,6 @@
 import { Db, MongoClient } from "mongodb";
 
-const connStr = "mongodb://localhost:27017";
+const connStr = "mongodb://mongos:27017";
 const dbName = "posts";
 
 export class MongoDBConnection {

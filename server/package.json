@@ -6,14 +6,12 @@
   "scripts": {
     "test": "mocha dist/test/**/*.spec.js --reporter spec",
     "start": "npm run serve",
-    "start-prod": "npm run serve-prod",
     "build": "npm run build-ts",
     "watch-node": "nodemon dist/src/bootstrap.js",
     "build-ts": "tsc",
     "watch-ts": "tsc -w",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
-    "serve": "set NODE_ENV=development && node dist/src/bootstrap.js",
-    "serve-prod": "set NODE_ENV=production && node bootstrap.js"
+    "serve": "node bootstrap.js"
   },
   "keywords": [
     "typescript",
@@ -42,6 +40,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "inversify": "^4.13.0",
+    "inversify-express-utils": "^6.0.0",
     "inversify-logger-middleware": "^3.1.0",
     "mongodb": "^3.1.0-beta4",
     "reflect-metadata": "^0.1.12"
